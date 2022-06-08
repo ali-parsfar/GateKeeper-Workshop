@@ -1,0 +1,26 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: opa-eks-22
+  region: ap-southeast-2
+  version: '1.22'
+
+managedNodeGroups:
+  - name: syd-mng
+    desiredCapacity: 3
+    instanceType: t3.medium
+    labels:
+      worker: default
+    maxSize: 4
+    minSize: 1
+    volumeSize: 20
+    ssh:
+      allow: true
+      publicKeyPath: ~/Documents/Keys/AliSyd-pub.key
+
+iam:
+  withOIDC: true
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
